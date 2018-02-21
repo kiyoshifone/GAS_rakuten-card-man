@@ -8,8 +8,4 @@
 
 # 使い方
 
-from:transaction@notice.aliexpress.com  
-から来るメールに対して，  
-label:Aliexpress  
-をあらかじめ設定する．  
 .gsコードをスクリプトとして毎分実行する．  
