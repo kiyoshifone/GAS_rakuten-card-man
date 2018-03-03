@@ -39,7 +39,7 @@ function looknewmail() {
         name:     '機械仕掛けのmyname'
       }
     );
-    GmailApp.search('is:inbox is:read subject:"今月累計使用金額"')[0].moveToArchive();
+    GmailApp.search('is:inbox is:read subject:"今月累計使用金額"')[0].moveToTrash();
     Logger.log("mail sent");
   } else {
     Logger.log("no new use of card");
