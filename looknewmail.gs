@@ -23,7 +23,7 @@ function looknewmail() {
       d = '<font size="5">カードの使用をただちに停止して下さい．</font>'
         + '</td></tr></table>';
     }
-    var addrs = "mail@kiyoshifone.jp";
+    var addrs = "xxxxxx@xxxxxxx.xxx";
     var sbjct = "今月累計使用金額 " + b + " 円";
     var hbody = c + "先ほど " + a +" 円 決済しました．<br>"
               + "今月はすでに " + b + " 円 決済しています．<br>" + d;
