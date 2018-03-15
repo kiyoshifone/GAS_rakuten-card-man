@@ -1,15 +1,13 @@
 function looknewmail() {
   var threads = GmailApp.search('is:unread subject:"【速報情報】カード利用お知らせメール"');
+  GmailApp.markThreadsRead(threads);
   if (threads.length>0) {
-    for (i=0;i<threads.length;i++) {
-      threads[i].markRead();
-    }
     var d = new Date();
     var m = ("0" + (d.getMonth()+1)).slice(0,2);
     var lstD = d.getFullYear() + "/" + m + "/01";
     var msg = GmailApp.search('subject:"【速報情報】カード利用お知らせメール" after:'+ lstD);
     var subTtl = [];
-    for (i=0;i<msg.length;i++) {
+    for (var i=0;i<msg.length;i++) {
       var pbdy = msg[i].getMessages()[0].getPlainBody();
       var stt = pbdy.indexOf("＜速報情報＞")+6;
       var end = pbdy.indexOf("ご利用",stt);
@@ -25,7 +23,7 @@ function looknewmail() {
       d = '<font size="5">カードの使用をただちに停止して下さい．</font>'
         + '</td></tr></table>';
     }
-    var addrs = "mail@mydomain.jp";
+    var addrs = "mail@kiyoshifone.jp";
     var sbjct = "今月累計使用金額 " + b + " 円";
     var hbody = c + "先ほど " + a +" 円 決済しました．<br>"
               + "今月はすでに " + b + " 円 決済しています．<br>" + d;
@@ -36,16 +34,16 @@ function looknewmail() {
       {
         from:     addrs,
         htmlBody: hbody,
-        name:     '機械仕掛けのmyname'
+        name:     'name'
       }
     );
-    GmailApp.search('is:inbox is:read subject:"今月累計使用金額"')[0].moveToTrash();
+    GmailApp.moveThreadsToTrash(GmailApp.search('is:inbox is:read subject:"今月累計使用金額"'));
     Logger.log("mail sent");
   } else {
     Logger.log("no new use of card");
   }
+  GmailApp.moveThreadsToTrash(GmailApp.search('subject:"【速報情報】カード利用お知らせメール" before:'+ lstD));
 }
-
 
 function arr2sum(b) {
   var i;
